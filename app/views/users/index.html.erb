@@ -1,1 +1,20 @@
 <h1>Home Page</h1>
+
+<% if current_user %>
+
+  <h2>Welcome <%= current_user.email %></h2>
+
+
+  <p>
+    <%= link_to "Post a new question", new_question_path %>
+
+  </p>
+<% end %>
+
+<% if @questions.any? %>
+  <ul>
+    <% @questions.each do |q| %>
+      <li><%= link_to  q.title, question_path(q)  %></li>
+    <% end %>
+  </ul>
+<% end %>

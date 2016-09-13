@@ -1,0 +1,40 @@
+<h3><%= @question.title %></h3>
+<p>
+  <%= @question.content %>
+</p>
+
+<% if @question.answers.any? %>
+  <ul>
+    <% @question.answers.each do |answer| %>
+      <li><%= answer.content %> | Upvote <%= form_for [@question, answer] do|f| %>
+                                  <div class="field">
+                                    <%= check_box_tag%>
+
+                                  </div>
+                                    <div class="actions">
+                                      <%= f.submit %>
+                                    </div>
+                                  <% end %><!--end of vote form -->
+      </li>
+    <% end %><!--end of each -->
+  </ul>
+<% end %>
+
+<% if current_user %>
+  <!-- # add answer form here  -->
+
+  <%= form_for [@question, @answer] do|f| %>
+  <div class="field">
+    <%= f.label :content %>
+    <%= f.text_field :content %>
+  </div>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+  <% end %>
+
+<% end %>
+
+<p>
+  <%= link_to "Back to questions", root_url %>
+</p>
